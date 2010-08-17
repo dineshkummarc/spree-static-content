@@ -5,29 +5,33 @@
 <table class="admin-report" width="545">
 	<thead>
 		<tr>
-      		<th><%=t("ext_static_content_title")%></th>
-      		<th><%=t("ext_static_content_link")%></th>
-      		<th><%=t("ext_static_content_visible")%></th>
-      		<th><%=t("action")%></th>
+		  <% hook :admin_pages_index_ths do %>
+      	<th><%=t("ext_static_content_title")%></th>
+      	<th><%=t("ext_static_content_link")%></th>
+      	<th><%=t("ext_static_content_visible")%></th>
+      	<th><%=t("action")%></th>
+      <% end %>
     	</tr>
   	</thead>
 	
 	<tbody>
-    	<% @pages.each do |page| %>
+  	<% @pages.each do |page| %>
 		<tr class="<%= cycle('even', 'odd') %>">
-			<td>
-				<%= page.title %>
-			</td>
-			<td>
-				<%= link_to page.link, page.link %>
-			</td>
-			<td>
-			  <%= page.visible %>
-			</td>
-			<td>
-	          <%=link_to t("edit"), edit_object_url(page) %> |
-	          <%=link_to t("delete"), object_url(page), :method => :delete, :confirm=> t("ext_static_content_confirm_delete") %>
-	        </td>
+		  <% hook :admin_pages_index_tds do %>
+  			<td>
+  				<%= page.title %>
+  			</td>
+  			<td>
+  				<%= link_to page.link, page.link %>
+  			</td>
+  			<td>
+  			  <%= page.visible %>
+  			</td>
+  			<td>
+  	      <%=link_to t("edit"), edit_object_url(page) %> |
+  	      <%=link_to t("delete"), object_url(page), :method => :delete, :confirm => t("ext_static_content_confirm_delete") %>
+        </td>
+      <% end %>
 		</tr>
 		<% end %>
 	</tbody>
